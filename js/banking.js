@@ -14,4 +14,11 @@ document
     depositTotal.innerText = previousDepositTotal + depositAmount;
 
     // update balance with deposit
+    const balanceTotal = document.getElementById('balance-total');
+    const previousBalanceTotalText = balanceTotal.innerText;
+    const previousBalanceTotal = parseFloat(previousBalanceTotalText);
+
+    balanceTotal.innerText = previousBalanceTotal + depositAmount;
+
+    depositInput.value = '';
   });
