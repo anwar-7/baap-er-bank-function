@@ -1,3 +1,85 @@
+/* 
+function doubleIt(num) {
+  const result = number * 2;
+  return result;
+}
+const first = doubleIt(5);
+const second = doubleIt(7);
+ */
+function getInputValue(inputId) {
+  const inputField = document.getElementById(inputId);
+  const inputAmountText = inputField.value;
+  const amountValue = parseFloat(inputAmountText);
+
+  // cleat deposit input filed
+  inputField.value = '';
+  return amountValue;
+}
+
+function updateTotalField(totalFieldId, amount) {
+  const totalElement = document.getElementById(totalFieldId);
+  const totalText = totalElement.innerText;
+  const previousTotal = parseFloat(totalText);
+
+  totalElement.innerText = previousTotal + amount;
+}
+
+function getCurrentBalance() {
+  const balanceTotal = document.getElementById('balance-total');
+  const previousBalanceTotalText = balanceTotal.innerText;
+  const previousBalanceTotal = parseFloat(previousBalanceTotalText);
+  return previousBalanceTotal;
+}
+
+function updateBalance(amount, isAdd) {
+  const balanceTotal = document.getElementById('balance-total');
+  const previousBalanceTotal = getCurrentBalance();
+  if (isAdd == true) {
+    balanceTotal.innerText = previousBalanceTotal + amount;
+  } else {
+    balanceTotal.innerText = previousBalanceTotal - amount;
+  }
+}
+
+// deposit
+document
+  .getElementById('deposit-button')
+  .addEventListener('click', function () {
+    const depositAmount = getInputValue('deposit-input');
+    // error handling
+    if (depositAmount > 0) {
+      // update deposit total
+      updateTotalField('deposit-total', depositAmount);
+      // update balance with deposit
+      updateBalance(depositAmount, true);
+    }
+  });
+
+// withdraw
+document
+  .getElementById('withdraw-button')
+  .addEventListener('click', function () {
+    const withdrawAmount = getInputValue('withdraw-input');
+    const currentBalance = getCurrentBalance();
+    // error handling
+    if (withdrawAmount > 0 && withdrawAmount < currentBalance) {
+      // update withdraw total
+      updateTotalField('withdraw-total', withdrawAmount);
+      // update balance
+      updateBalance(withdrawAmount, false);
+    }
+    if (withdrawAmount < currentBalance) {
+      console.log(
+        'You can not withdraw more than what your currentBalance in your account'
+      );
+    }
+  });
+
+//
+//
+//
+// nonfunctional program
+/* 
 // deposit
 document
   .getElementById('deposit-button')
@@ -21,7 +103,8 @@ document
 
     balanceTotal.innerText = previousBalanceTotal + depositAmount;
 
-    depositInput.value = '';
+    // cleat deposit input filed
+  depositInput.value = '';
   });
 
 // withdraw
@@ -45,4 +128,8 @@ document
     const previousBalanceTotal = parseFloat(previousBalanceTotalText);
 
     balanceTotal.innerText = previousBalanceTotal - withdrawAmount;
+
+    // clear withdraw input filed
+    withdrawInput.value = '';
   });
+ */
