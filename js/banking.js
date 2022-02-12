@@ -1,3 +1,4 @@
+// deposit
 document
   .getElementById('deposit-button')
   .addEventListener('click', function () {
@@ -21,4 +22,13 @@ document
     balanceTotal.innerText = previousBalanceTotal + depositAmount;
 
     depositInput.value = '';
+  });
+
+// withdraw
+document
+  .getElementById('withdraw-button')
+  .addEventListener('click', function () {
+    const withdrawInput = document.getElementById('withdraw-input');
+    const withdrawAmountText = withdrawInput.value;
+    const withdrawAmount = parseFloat(withdrawAmountText);
   });
