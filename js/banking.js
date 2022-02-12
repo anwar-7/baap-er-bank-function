@@ -7,4 +7,11 @@ document
     const depositAmount = parseFloat(depositAmountText);
 
     // update deposit total
+    const depositTotal = document.getElementById('deposit-total');
+    const previousDepositTotalText = depositTotal.innerText;
+    const previousDepositTotal = parseFloat(previousDepositTotalText);
+
+    depositTotal.innerText = previousDepositTotal + depositAmount;
+
+    // update balance with deposit
   });
